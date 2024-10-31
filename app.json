@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "HelloWorld",
-    "slug": "expo-template-default",
+    "name": "RN FokusFaktor",
+    "slug": "rn-fokusfaktor",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -13,13 +13,15 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.breathingflesh.rnfokusfaktor"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.breathingflesh.rnfokusfaktor"
     },
     "web": {
       "bundler": "metro",
@@ -31,6 +33,18 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "ed58f113-afe4-4db8-b56b-304593e2eb12"
+      }
+    },
+    "owner": "breathingflesh",
+    "updates": {
+      "url": "https://u.expo.dev/ed58f113-afe4-4db8-b56b-304593e2eb12"
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
     }
   }
 }
