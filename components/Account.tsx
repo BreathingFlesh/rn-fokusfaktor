@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
-import { StyleSheet, View, Alert } from 'react-native'
+import { StyleSheet, View, Alert, Text } from 'react-native'
 import { Button, Input } from '@rneui/themed'
 import { Session } from '@supabase/supabase-js'
 
@@ -10,8 +10,12 @@ export default function Account({ session }: { session: Session }) {
   const [website, setWebsite] = useState('')
   const [avatarUrl, setAvatarUrl] = useState('')
 
+  const [factorName, setFactorName] = useState('')
+
   useEffect(() => {
-    if (session) getProfile()
+    if (session) 
+      getProfile()
+      getFactors()
   }, [session])
 
   async function getProfile() {
@@ -32,6 +36,31 @@ export default function Account({ session }: { session: Session }) {
         setUsername(data.username)
         setWebsite(data.website)
         setAvatarUrl(data.avatar_url)
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        Alert.alert(error.message)
+      }
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  async function getFactors() {
+    try {
+      setLoading(true)
+      if (!session?.user) throw new Error('No user on the session!')
+
+      const { data, error, status } = await supabase
+        .from('factor')
+        .select(`name`)
+        .eq('user_id', session?.user.id).single()
+      if (error && status !== 406) {
+        throw error
+      }
+
+      if (data) {
+        setFactorName(data.name)
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -95,6 +124,10 @@ export default function Account({ session }: { session: Session }) {
           onPress={() => updateProfile({ username, website, avatar_url: avatarUrl })}
           disabled={loading}
         />
+      </View>
+
+      <View style={styles.verticallySpaced}>
+        <Text>Factorname: {factorName}</Text>
       </View>
 
       <View style={styles.verticallySpaced}>
