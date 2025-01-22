@@ -15,7 +15,7 @@ export default function Account({ session }: { session: Session }) {
   useEffect(() => {
     if (session) 
       getProfile()
-      getFactors()
+      getFactors() //To Do: Create new View to Load Factor Informations. Right now it shows on the Profile View.
   }, [session])
 
   async function getProfile() {
@@ -46,6 +46,7 @@ export default function Account({ session }: { session: Session }) {
     }
   }
 
+  // To Do: Move this Code Snippet to Factor View once it's created.
   async function getFactors() {
     try {
       setLoading(true)
@@ -126,6 +127,7 @@ export default function Account({ session }: { session: Session }) {
         />
       </View>
 
+      {/*Move to Factor View once created.*/}
       <View style={styles.verticallySpaced}>
         <Text>Factorname: {factorName}</Text>
       </View>
