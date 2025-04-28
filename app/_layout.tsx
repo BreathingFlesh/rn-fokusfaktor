@@ -1,10 +1,11 @@
 import React from 'react';
 import { Stack } from 'expo-router';
 
-export default function Layout() {
+export default function RootLayout() {
   return (
     <Stack>
-      <Stack.Screen name="home" options={{ title: 'Home' }} />
+      <Stack.Screen name="(tabs)" options={{ title: 'Index' }} />
+      <Stack.Screen name="+not-found" />
     </Stack>
   );
 }
