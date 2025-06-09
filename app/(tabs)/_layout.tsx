@@ -24,15 +24,7 @@ export default function TabsLayout() {
             },
         }}
         tabBar={(props) =>
-          Platform.OS === "ios" ? (
-            <BlurView
-              style={{ position: "absolute", bottom: 0, left: 0, right: 0 }}
-            //   tint={useColorScheme == "dark" ? "dark" : "light"}
-              intensity={95}
-            >
-              <BottomTabBar {...props} />
-            </BlurView>
-          ) : (
+          (
             <BottomTabBar {...props} />
           )
         }
