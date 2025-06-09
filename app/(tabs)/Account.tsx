@@ -12,6 +12,7 @@ export default function Account({ session }: { session: Session }) {
 
   const [factorName, setFactorName] = useState('')
 
+  
   useEffect(() => {
     if (session) 
       getProfile()

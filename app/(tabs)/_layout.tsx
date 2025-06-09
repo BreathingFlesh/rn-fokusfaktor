@@ -1,43 +1,73 @@
 //TABS LAYOUT
 
 import { Tabs } from 'expo-router';
+import { BottomTabBar } from '@react-navigation/bottom-tabs';
+import { BlurView } from 'expo-blur';
 
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { Platform } from 'react-native';
 
 
-export default function TabLayout() {
+export default function TabsLayout() {
     return (
-        <Tabs
-            screenOptions={{
-                tabBarActiveTintColor: '#ffd33d',
-                headerStyle: {
-                    backgroundColor: '#25292e',
-                },
-                headerShadowVisible: false,
-                headerTintColor: '#fff',
-                tabBarStyle: {
-                    backgroundColor: '#25292e',
-                },
-            }}
-        >
-            <Tabs.Screen
-                name="index"
-                options={{
-                    title: 'Home',
-                    tabBarIcon: ({ color, focused }) => (
-                        <Ionicons name={focused ? 'home-sharp' : 'home-outline'} color={color} size={24} />
-                    ),
-                }}
-            />
-            <Tabs.Screen
-                name="Account"
-                options={{
-                    title: 'Account',
-                    tabBarIcon: ({ color, focused }) => (
-                        <Ionicons name={focused ? 'home-sharp' : 'home-outline'} color={color} size={24} />
-                    ),
-                }}
-            />
-        </Tabs>
+      <Tabs
+        initialRouteName="home"
+        screenOptions={{
+            tabBarActiveTintColor: '#ffd33d',
+            headerStyle: {
+                backgroundColor: '#25292e',
+            },
+            headerShadowVisible: false,
+            headerTintColor: '#fff',
+            tabBarStyle: {
+                backgroundColor: '#25292e',
+            },
+        }}
+        tabBar={(props) =>
+          Platform.OS === "ios" ? (
+            <BlurView
+              style={{ position: "absolute", bottom: 0, left: 0, right: 0 }}
+            //   tint={useColorScheme == "dark" ? "dark" : "light"}
+              intensity={95}
+            >
+              <BottomTabBar {...props} />
+            </BlurView>
+          ) : (
+            <BottomTabBar {...props} />
+          )
+        }
+      >
+        <Tabs.Screen
+          name="Entries"
+          options={{
+            href: "/Entries",
+            tabBarIcon: ({ color, focused }) => (
+                <Ionicons name={focused ? 'list-sharp' : 'list-outline'} color={color} size={24} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="Account"
+          options={{
+            href: {
+              pathname: "/Account",
+            },
+            tabBarIcon: ({ color, focused }) => (
+                <Ionicons name={focused ? 'person-sharp' : 'person-outline'} color={color} size={24} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="Factors"
+          options={{
+            href: {
+              pathname: "/Factors",
+            },
+            tabBarIcon: ({ color, focused }) => (
+                <Ionicons name={focused ? 'heart-circle-sharp' : 'heart-circle-outline'} color={color} size={24} />
+            ),
+          }}
+        />
+      </Tabs>
     );
-}
+  }
